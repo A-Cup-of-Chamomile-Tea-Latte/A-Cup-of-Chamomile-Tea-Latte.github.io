@@ -1,53 +1,81 @@
+import { BASE_URL } from "./utils/config";
+
 export default {
   site: {
-    title: "My Blog",
-    subtitle: "My Blog Subtitle",
-    description: "D-Sketon's blog",
-    keywords: "D-Sketon, blog, astro, theme",
-    author: "D-Sketon",
-    language: "zh-CN",
+    title: "Dingding 真棒！",
+    subtitle: "這真的是個稱職的研究生嗎？都在用 AI",
+    description: "一個夢想與實際不相符的計畫",
+    keywords: "ECON., Econometrics, econometrics, statistics, research notes",
+    author: "A Cup of Chamomile Tea Latte",
+    language: "zh-TW",
   },
+
 
   sidebar: {
-    avatar: "/images/avatar.webp",
-    position: "right", // left or right
+    BASE_URL: BASE_URL,
+    avatar: "/images/avatar0.png",
+    position: "left", // left or right
   },
 
-  widgets: ["recent_posts", "category", "tag", "tagcloud"],
+  // Sidebar widgets (left column)
+  widgets: [
+    "recent_posts",
+    "tagcloud",
 
-  menu: [
-    { name: "home", url: "/" },
-    { name: "archives", url: "/archives" },
-    { name: "about", url: "/about" },
+    // NOTE (future): add "category" back once your taxonomy stabilizes
+    // "category",
   ],
 
-  banner: "/images/banner.webp", // which means themes/reimu/source/images/banner.webp
+  menu: [
+    // Core
+    { name: "Home", url: "/" },
+    { name: "Archives", url: "/archives" },
+    { name: "About", url: "/about" },
+
+    // Quartz knowledge base (served under Astro as a subpath)
+    { name: "KB", url: "/kb/" },
+
+    // Future placeholders (uncomment when you actually create these pages)
+    // { name: "Tools", url: "/tools/" },   // econometrics / stats "menu-style" toolbox
+    // { name: "Search", url: "/search/" }, // if you add a site search page
+    // { name: "Projects", url: "/projects/" },
+  ],
+
+  banner: "/images/banner0.png", // which means themes/reimu/source/images/banner.webp
   // You can also write it in the form of the following url
   // banner: "https://example.com"
 
   // If you want to use the srcset attribute, please enable it
   banner_srcset: {
-    enable: true,
-    srcset: [
-      { src: "/images/banner-600w.webp", media: "(max-width: 479px)" },
-      { src: "/images/banner-800w.webp", media: "(max-width: 799px)" },
-      { src: "/images/banner.webp", media: "(min-width: 800px)" },
-    ],
+    enable: false,
+    // srcset: [
+    //   { src: "/images/banner-600w.webp", media: "(max-width: 479px)" },
+    //   { src: "/images/banner-800w.webp", media: "(max-width: 799px)" },
+    //   { src: "/images/banner.webp", media: "(min-width: 800px)" },
+    // ],
   },
 
   footer: {
-    since: 2020, // 2020 - current year
-    powered: true,
-    count: true,
-    busuanzi: true,
-    icp: {
-      icpnumber: "",
-      beian: "",
-      recordcode: "",
-    },
-    moe_icp: {
-      icpnumber: "",
-    }
+    since: 2020, // Site start year shown in footer (e.g., "© 2020-2026")
+    powered: true, // Show theme/framework credit ("Powered by ...")
+
+    // Page / site counters (theme-dependent)
+    count: false, // (If supported) show post/page count or runtime counter
+    // busuanzi: false, // CN-based visitor counter service; enable only if you intentionally use it
+
+    // ICP / 备案（你目前決定跳過；若未來有需求再打開）
+    // icp: {
+    //   icpnumber: "", // e.g., "京ICP备xxxx号"
+    //   beian: "",     // additional备案 text (theme-dependent)
+    //   recordcode: "",// 公安备案号 (theme-dependent)
+    // },
+    // moe_icp: {
+    //   icpnumber: "",
+    // },
+
+    // --- Optional placeholders (uncomment if your theme supports them) ---
+    // rss: true, // Show RSS link in footer (if theme supports)
+    // social: true, // Show social icons in footer (if theme supports)
   },
 
   analytics: {
@@ -58,31 +86,18 @@ export default {
 
   social: {
     // email: mailto:xxx@gmail.com
-    github: "https://github.com/yourname",
-    google: "https://plus.google.com/yourname",
-    twitter: "https://twitter.com/yourname",
-    facebook: "https://www.facebook.com/yourname",
-    // instagram: https://www.instagram.com/yourname
-    // linkedin: https://www.linkedin.com/in/yourname
-    // pinterest: https://www.pinterest.com/yourname
-    // youtube: https://www.youtube.com/channel/yourname
-    // vimeo: https://vimeo.com/yourname
-    // flickr: https://www.flickr.com/photos/yourname
-    // dribbble: https://dribbble.com/yourname
-    // behance: https://www.behance.net/yourname
-    // bilibili: https://space.bilibili.com/yourname
-    // weibo: https://weibo.com/yourname
-    // zhihu: https://www.zhihu.com/people/yourname
-    // reddit: https://www.reddit.com/user/yourname
-    // tumblr: https://yourname.tumblr.com
-    // medium: https://medium.com/@yourname
-    // deviantart: https://yourname.deviantart.com
-    // keybase: https://keybase.io/yourname
-    // telegram: https://t.me/yourname
-    // discord: https://discordapp.com/users/yourname
-    // steam: https://steamcommunity.com/id/yourname
+    github: "https://github.com/A-Cup-of-Chamomile-Tea-Latte",
+    instagram: "https://www.instagram.com/chamomile_ding/",
+    email: "mailto:rewqazxcv0527@gmail.com",
+    telegram: "https://t.me/NTU_Chamomile_Tea",
+
+    // (Optional placeholders)
+    // linkedin: "https://www.linkedin.com/in/yourname",
+    // facebook: "https://www.facebook.com/yourname",
+    // youtube: "https://www.youtube.com/channel/yourname",
   },
 
+  // Comments (all disabled for now; enable later when ready)
   // https://valine.js.org
   valine: {
     enable: false, // if you want to use valine,please set this value is true
@@ -91,12 +106,12 @@ export default {
     pageSize: 10, // comment list page size
     avatar: "mp", // gravatar style https://valine.js.org/#/avatar
     lang: "zh-cn", // i18n: zh-cn/en
-    placeholder: "Just go go", // valine comment input placeholder(like: Please leave your footprints )
-    guest_info: "nick,mail,link", //valine comment header info
-    recordIP: true, // whether to record the IP address of the commenters
-    highlight: true, // whether to highlight the code blocks
-    visitor: false, // whether to display the number of visitors
-    serverURLs: "", // leancloud server url
+    placeholder: "Just go go", // valine comment input placeholder
+    guest_info: "nick,mail,link", // valine comment header info
+    recordIP: true,
+    highlight: true,
+    visitor: false,
+    serverURLs: "",
   },
 
   // https://waline.js.org/
@@ -104,7 +119,7 @@ export default {
     enable: false,
     serverURL: "",
     lang: "zh-CN",
-    locale: {}, // https://waline.js.org/guide/features/i18n.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80
+    locale: {},
     emoji: [
       "https://unpkg.com/@waline/emojis@1.2.0/weibo",
       "https://unpkg.com/@waline/emojis@1.2.0/alus",
@@ -147,22 +162,22 @@ export default {
   // https://utteranc.es
   utterances: {
     enable: false,
-    repo: "owner/repo", // Change this to "Your GitHub Username/The Repository Name" used for storing blog comments
+    repo: "owner/repo",
     issue_term: "title",
-    theme: "auto", // auto means to automatically adapt to dark and light themes, you can also use specific themes like github-light, github-dark, preferred-color-scheme, etc.
+    theme: "auto",
   },
 
   // https://twikoo.js.org
   twikoo: {
     enable: false,
-    envId: "", // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
+    envId: "",
     region: "",
   },
 
   // https://disqus.com
   disqus: {
     enable: false,
-    shortname: "", // your disqus shortname
+    shortname: "",
     count: true,
   },
 
@@ -184,7 +199,7 @@ export default {
       date: false,
       updated: false,
       license: true,
-      license_type: 'by-nc-sa',
+      license_type: "by-nc-sa",
     },
   },
 
@@ -194,75 +209,61 @@ export default {
     rotate: true, // whether to rotate the icon
   },
 
+  // firework (too flashy for now; kept as commented block for future)
   // see https://github.com/D-Sketon/mouse-firework
-  firework: {
-    enable: true,
-    disable_on_mobile: false,
-    options: {
-      excludeElements: ["a", "button"],
-      particles: [
-        {
-          shape: "circle",
-          move: ["emit"],
-          easing: "easeOutExpo",
-          colors: [
-            "var(--red-1)",
-            "var(--red-2)",
-            "var(--red-3)",
-            "var(--red-4)",
-          ],
-          number: 20,
-          duration: [1200, 1800],
-          shapeOptions: {
-            radius: [16, 32],
-            alpha: [0.3, 0.5],
-          },
-        },
-        {
-          shape: "circle",
-          move: ["diffuse"],
-          easing: "easeOutExpo",
-          colors: ["var(--red-0)"],
-          number: 1,
-          duration: [1200, 1800],
-          shapeOptions: {
-            radius: 20,
-            alpha: [0.2, 0.5],
-            lineWidth: 6,
-          },
-        },
-      ],
-    },
-  },
+  // firework: {
+  //   enable: true,              // Mouse click firework effect
+  //   disable_on_mobile: false,  // Disable effect on mobile devices
+  //   options: {
+  //     excludeElements: ["a", "button"], // Do not trigger on links/buttons
+  //     particles: [
+  //       {
+  //         shape: "circle",
+  //         move: ["emit"],
+  //         easing: "easeOutExpo",
+  //         colors: ["var(--red-1)", "var(--red-2)", "var(--red-3)", "var(--red-4)"],
+  //         number: 20,
+  //         duration: [1200, 1800],
+  //         shapeOptions: { radius: [16, 32], alpha: [0.3, 0.5] },
+  //       },
+  //       {
+  //         shape: "circle",
+  //         move: ["diffuse"],
+  //         easing: "easeOutExpo",
+  //         colors: ["var(--red-0)"],
+  //         number: 1,
+  //         duration: [1200, 1800],
+  //         shapeOptions: { radius: 20, alpha: [0.2, 0.5], lineWidth: 6 },
+  //       },
+  //     ],
+  //   },
+  // },
+
   // show categories card on home page
   home_categories: {
-    enable: false,
+    enable: false, // Enable later when homepage is designed as a navigational landing page
     content: [
-      {
-        categories: ""
-      },
-    ]
+      // { categories: "Econometrics" },
+      // { categories: "Statistics" },
+      // { categories: "Research Notes" },
+      // { categories: "Tools" },
+    ],
   },
+
   triangle_badge: {
-    enable: false,
+    enable: true,
     type: "github",
     link: "https://github.com/D-Sketon/astro-theme-reimu",
   },
+
   // whether to display the notification when the article is outdated
   outdate: {
     enable: false,
     daysAgo: 180, // The number of days after which the article is considered outdated
   },
 
-  share: [
-    "weibo",
-    "twitter",
-    "facebook",
-    "linkedin",
-    "reddit",
-    "qq",
-    "weixin",
-  ],
+  // Share buttons (platforms supported by theme; IG/Threads typically not supported here)
+  share: ["facebook", "linkedin"],
 
   sponsor: {
     enable: false,
@@ -272,3 +273,5 @@ export default {
     ],
   },
 };
+
+

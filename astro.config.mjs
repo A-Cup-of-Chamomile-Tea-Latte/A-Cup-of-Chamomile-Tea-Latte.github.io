@@ -4,8 +4,9 @@ import sitemap from '@astrojs/sitemap';
 import astroExpressiveCode from 'astro-expressive-code';
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
-import icon from "astro-icon";
-import react from "@astrojs/react";
+import icon from 'astro-icon';
+import react from '@astrojs/react';
+
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import Font from 'vite-plugin-font';
@@ -15,34 +16,48 @@ import rehypeLazyLoadImage from './src/plugins/lazyLoadImage.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  // ✅ GitHub Pages (User Pages)
+  site: 'https://A-Cup-of-Chamomile-Tea-Latte.github.io',
+
+  // Markdown pipeline: math + performance
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex, rehypeLazyLoadImage],
-    syntaxHighlight: false
+    syntaxHighlight: false, // disable Astro default, use Expressive Code instead
   },
-  integrations: [mermaid(), astroExpressiveCode({
-    // You can use any of the themes bundled with Shiki by name,
-    // specify a path to JSON theme file, or pass an instance
-    // of the `ExpressiveCodeTheme` class here:
-    themes: ['github-light', 'github-dark'],
-    useDarkModeMediaQuery: false,
-    themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
-    shiki: {
-      // You can pass additional plugin options here,
-      // e.g. to load custom language grammars:
-      langs: [
-        // import('./some-exported-grammar.mjs'),
-        // JSON.parse(fs.readFileSync('./some-json-grammar.json', 'utf-8'))
-      ]
-    },
-    plugins: [pluginCollapsibleSections(), pluginLineNumbers()]
-  }), mdx(), sitemap(), icon(), react()],
+
+  integrations: [
+    // Diagrams in Markdown / MDX
+    mermaid(),
+
+    // High-level code rendering (research-grade)
+    astroExpressiveCode({
+      themes: ['github-light', 'github-dark'],
+      useDarkModeMediaQuery: false,
+      themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
+      shiki: {
+        langs: [
+          // custom grammars can be added here later
+        ],
+      },
+      plugins: [
+        pluginCollapsibleSections(),
+        pluginLineNumbers(),
+      ],
+    }),
+
+    mdx(),
+    sitemap(),
+    icon(),
+    react(),
+  ],
+
+  // Vite-level optimizations
   vite: {
     plugins: [
-     Font.vite({
-        scanFiles: ['src/**/*.{ts,tsx,js,jsx,md,mdx,astro,yml}']
+      Font.vite({
+        scanFiles: ['src/**/*.{ts,tsx,js,jsx,md,mdx,astro,yml}'],
       }),
-    ]
-  }
+    ],
+  },
 });
