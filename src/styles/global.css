@@ -35,6 +35,7 @@
   --shadow-red-6-shadow: 0 0 8px var(--color-red-6-shadow);
 }
 
+
 [data-theme="dark"]:root {
   --red-0: var(--red-1);
   --red-4: rgba(255, 208, 208, .5);
@@ -273,4 +274,18 @@ body {
 [data-aos^="fade"],
 [data-aos^="zoom"] {
   transition-property: all !important;
+}
+
+/* 26/02/05 Added Font Setting*/
+
+:root {
+  --font-sans: "Noto Sans", "Noto Sans TC",
+    "Microsoft JhengHei", "PingFang TC", "Heiti TC",
+    system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  --font-serif: "Times New Roman", Times, serif;
+}
+
+body {
+  font-family: var(--font-sans);
 }

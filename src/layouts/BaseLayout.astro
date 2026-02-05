@@ -44,7 +44,17 @@ const {
 <!doctype html>
 <html lang={SITE.language}>
   <head>
-    <ThemeScript />
+     <ThemeScript />
+        <CommonMeta title={title} description={description} keywords={keywords} />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        />
+
+    
     <CommonMeta title={title} description={description} keywords={keywords} />
     <style>
       main {
@@ -91,9 +101,11 @@ const {
     <MobileNav isPost={isPost} headings={headings} toc={toc} />
     <div id="mask" class="hide"></div>
     <SidebarScript />
-    <script>
+
+    <!-- <script>
       import { css } from "../assets/LXGWWenKaiScreen.ttf";
       document.body.style.fontFamily = css.family as string;
-    </script>
+    </script> -->
+
   </body>
 </html>
