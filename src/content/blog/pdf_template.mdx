@@ -1,0 +1,23 @@
+---
+title: "PDF 閱讀模板"
+description: "這是一篇測試文章，用於驗證手寫筆記 PDF 在部落格中的嵌入效果。"
+pubDate: 2026-02-20
+categories: ["PDF"]
+tags: ["Study"]
+---
+
+import PdfReader from "../../components/pdfreader.astro";
+
+## 模板
+
+這是我測試放入的 PDF 檔案。
+
+<div style={{ height: '800px', marginTop: '20px', marginBottom: '20px', border: '1px solid #eee', borderRadius: '8px', overflow: 'hidden' }}>
+  <PdfReader url="/PDF/EG4 - Percentage and Percentage Change.pdf" />
+</div>
+
+---
+
+如果上方顯示空白，請檢查：
+1. 檔案是否在 `public/test/` 資料夾下。
+2. 檔名是否完全一致（包含空格）。

@@ -1,0 +1,70 @@
+---
+import PdfReader from '../components/pdfreader.astro';
+
+/**
+ * 測試資料設定
+ * 1. 本地檔案：確保檔案位於 /public/test/ 目錄下
+ * 2. 雲端檔案：使用你提供的 Google Drive ID
+ */
+const localPdfUrl = '/test/EG4 - Percentage and Percentage Change.pdf'; 
+
+// 填入檔案 ID
+const fileId = '1f6TZUTzKTFuXKr0Ivz-Rk5vq9srMd2We';
+// 自動組合成預覽用的 URL
+const driveUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+---
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Reader 實測</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #f3f4f6; }
+    </style>
+</head>
+<body>
+  <main class="container mx-auto p-8">
+    <header class="mb-8 text-center">
+      <h1 class="text-3xl font-bold text-gray-800">PDF 閱讀器功能實測</h1>
+      <p class="text-gray-600 mt-2">驗證檔案渲染：本地 ✅ | 雲端 ⏳</p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- 測試 A：本地檔案 -->
+      <section class="flex flex-col">
+        <div class="flex items-center mb-4">
+          <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm mr-2 shadow-sm">測試 A</span>
+          <h2 class="text-xl font-semibold text-gray-700">本地靜態檔案</h2>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow-md h-[700px]">
+          <PdfReader url={localPdfUrl} />
+        </div>
+        <p class="text-xs text-gray-400 mt-2 text-center">路徑：public{localPdfUrl}</p>
+      </section>
+
+      <!-- 測試 B：Google Drive -->
+      <section class="flex flex-col">
+        <div class="flex items-center mb-4">
+          <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm mr-2 shadow-sm">測試 B</span>
+          <h2 class="text-xl font-semibold text-gray-700">Google Drive 雲端檔案</h2>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow-md h-[700px]">
+          <PdfReader url={driveUrl} />
+        </div>
+        <div class="mt-2 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+          <p class="text-xs text-yellow-700">
+            <strong>目前的檔案 ID：</strong><br/>
+            <code>{fileId}</code><br/><br/>
+            <strong>疑難排解：</strong><br/>
+            1. 確保 Google Drive 檔案已設為「知道連結的人皆可查看」。<br/>
+            2. 若顯示拒絕存取，請嘗試在瀏覽器使用「無痕模式」開啟。
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

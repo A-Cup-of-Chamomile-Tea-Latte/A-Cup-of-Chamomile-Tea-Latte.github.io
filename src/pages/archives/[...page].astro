@@ -34,32 +34,30 @@ type Props = {
 };
 
 const { page } = Astro.props;
-// group by year
-const postsByYear: Map<number, CollectionEntry<"blog">[]> = new Map();
-page.data.forEach((post) => {
-  const year = post.data.pubDate.getFullYear();
-  if (postsByYear.has(year)) {
-    postsByYear.get(year)!.push(post);
-  } else {
-    postsByYear.set(year, [post]);
+
+// --- 數據抓取與處理核心區塊 ---
+const posts = await getCollection("blog");
+const categories = new Set<string>();
+const tagCounts = new Map<string, number>();
+
+posts.forEach((post) => {
+  // 處理分類：維持 Set
+  if (Array.isArray(post.data.categories)) {
+    post.data.categories.forEach((category) => categories.add(category));
+  }
+  // 處理標籤：計算出現頻率
+  if (Array.isArray(post.data.tags)) {
+    post.data.tags.forEach((tag) => {
+      tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+    });
   }
 });
 
-const posts = await getCollection("blog");
-const tags = new Set<string>();
-const categories = new Set<string>();
-posts.forEach((post) => {
-  if (Array.isArray(post.data.tags)) {
-    post.data.tags.forEach((tag) => {
-      tags.add(tag);
-    });
-  }
-  if (Array.isArray(post.data.categories)) {
-    post.data.categories.forEach((category) => {
-      categories.add(category);
-    });
-  }
-});
+// --- 修改點：定義「Top Tags」並包含數量 ---
+const topTags = Array.from(tagCounts.entries())
+  .sort((a, b) => b[1] - a[1]) // 頻率高到低
+  .slice(0, 15)                 // 只取前 15 個 (可依喜好調整數字)
+  .map(([name, count]) => ({ name, count })); // 關鍵：打包成物件格式
 ---
 
 <BaseLayout title={__("archive_a")}>
@@ -72,7 +70,8 @@ posts.forEach((post) => {
   <!-- Content -->
   <section id="main" aria-label="Main content">
     <div class="archives-outer-wrap" data-aos="fade-up">
-      <TagList tags={[...tags]} />
+      <!-- 這裡現在傳入的是物件陣列，而不是純字串陣列了 -->
+      <TagList tags={topTags} />
       <CategoryList categories={[...categories]} />
       <ArchiveList page={page} type="archives" />
     </div>

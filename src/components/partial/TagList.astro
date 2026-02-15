@@ -3,8 +3,11 @@ import { Icon } from "astro-icon/components";
 
 import { BASE_URL } from "../../utils/config";
 
+// 定義標籤的型別：可以是純字串 (舊模式) 或 帶有數量的物件 (新模式)
+type TagItem = string | { name: string; count: number };
+
 type Props = {
-  tags: string[];
+  tags: TagItem[];
 };
 
 const { tags } = Astro.props;
@@ -13,6 +16,10 @@ const { tags } = Astro.props;
 <div class="tag-wrap">
   {
     tags.map((tag) => {
+      // 邏輯判斷：如果是字串就直接用，如果是物件就拆解
+      const tagName = typeof tag === "string" ? tag : tag.name;
+      const tagCount = typeof tag === "string" ? null : tag.count;
+
       return (
         <div class="archives-tag-list-item">
           <Icon
@@ -20,8 +27,11 @@ const { tags } = Astro.props;
             style="margin-right: 8px; vertical-align: bottom;"
             size={12}
           />
-          <a class="archives-tag-list-link" href={`${BASE_URL}/tags/${tag}`}>
-            {tag}
+          {/* 關鍵修正：href 永遠只使用 tagName，確保連結不壞掉 */}
+          <a class="archives-tag-list-link" href={`${BASE_URL}/tags/${tagName}`}>
+            {tagName}
+            {/* 如果有數量資訊，就顯示出來 */}
+            {tagCount !== null && <span class="tag-count"> ({tagCount})</span>}
           </a>
         </div>
       );
@@ -50,10 +60,23 @@ const { tags } = Astro.props;
       padding: 8px 16px;
       margin: 6px;
       box-shadow: var(--shadow-meta);
+      transition: transform 0.2s ease; // 增加一點互動感
+
+      &:hover {
+        transform: translateY(-2px);
+      }
     }
     .archives-tag-list-link {
       color: var(--red-1);
       font-size: 12px;
+      display: flex;          // 讓文字和數字對齊
+      align-items: center;
+    }
+
+    .tag-count {
+      margin-left: 4px;
+      opacity: 0.8;           // 稍微淡一點，區分層次
+      font-weight: bold;
     }
   }
 </style>

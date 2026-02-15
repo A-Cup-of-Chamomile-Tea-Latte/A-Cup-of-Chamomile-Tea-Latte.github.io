@@ -27,12 +27,12 @@ export default {
   ],
 
   menu: [
-    // Core
+    // 核心頁面
     { name: "Home", url: "/" },
     { name: "Archives", url: "/archives" },
     { name: "About", url: "/about" },
 
-    // Quartz knowledge base (served under Astro as a subpath)
+    // 知識庫
     { name: "KB", url: "/kb/" },
 
     // Future placeholders (uncomment when you actually create these pages)
