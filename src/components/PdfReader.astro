@@ -14,9 +14,11 @@ const { url, title = "PDF Document", height = "750px" } = Astro.props;
 
 // 簡單處理 Google Drive 連結轉直連的邏輯 (如果是 ID 格式)
 let finalUrl = url;
+// 修改原本的邏輯
 if (url.includes("drive.google.com/file/d/")) {
   const fileId = url.split("/d/")[1].split("/")[0];
-  finalUrl = `https://drive.google.com/uc?id=${fileId}`;
+  // 加入 &ext=.pdf 強制讓瀏覽器識別為 PDF
+  finalUrl = `https://drive.google.com/uc?id=${fileId}&ext=.pdf`;
 }
 ---
 

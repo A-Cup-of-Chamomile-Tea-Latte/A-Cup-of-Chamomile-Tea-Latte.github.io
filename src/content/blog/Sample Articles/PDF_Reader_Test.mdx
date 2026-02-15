@@ -6,18 +6,20 @@ categories: ["PDF"]
 tags: ["Study"]
 ---
 
-import PdfReader from "src/components/PdfReader.astro";
+import PdfReader from "../../../components/PdfReader.astro";
 
 ## 手寫筆記預覽
 
 這是我測試放入的 PDF 檔案。
 
-<div style={{ height: '800px', marginTop: '20px', marginBottom: '20px', border: '1px solid #eee', borderRadius: '8px', overflow: 'hidden' }}>
-  <PdfReader url="/PDF/EG4 - Percentage and Percentage Change.pdf" />
-</div>
+<PdfReader 
+  url="/PDF/EG4%20-%20Percentage%20and%20Percentage%20Change.pdf" 
+  title="Percentage Change Notes"
+  height="800px" 
+/>
 
 ---
 
 如果上方顯示空白，請檢查：
-1. 檔案是否在 `public/test/` 資料夾下。
-2. 檔名是否完全一致（包含空格）。
+1. 檔案是否位於 `public/PDF/` 資料夾（目前路徑配置）。
+2. 檔名是否已將空格替換為 `%20`。
